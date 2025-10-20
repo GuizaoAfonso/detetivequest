@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#define HASH_SIZE 101    /* tamanho da tabela hash (primo razoável) */
+#define HASH_SIZE 101    /* tamanho da tabela hash */
 #define MAX_STR 128
 
 /* --- Estruturas --- */
@@ -120,7 +120,7 @@ const char *encontrarSuspeito(HashTable *ht, const char *pista) {
 }
 
 /* inserirPista() / adicionarPista() – insere a pista coletada na árvore de pistas.
-   Mantém ordem lexicográfica. Se já existir a pista, não insere duplicata. */
+   Mantém ordem. Se já existir a pista, não insere. */
 PistaNode *inserirPista(PistaNode *root, const char *pista) {
     if (!root) {
         PistaNode *n = (PistaNode *)malloc(sizeof(PistaNode));
@@ -143,7 +143,7 @@ PistaNode *inserirPista(PistaNode *root, const char *pista) {
     return root;
 }
 
-/* imprimir as pistas coletadas em ordem (inorder traversal) */
+/* imprimir as pistas coletadas em ordem */
 void listarPistasInorder(PistaNode *root) {
     if (!root) return;
     listarPistasInorder(root->esq);
@@ -289,16 +289,16 @@ const char *pistaParaSala(const char *nome) {
     return NULL;
 }
 
-/* --- main: monta o mapa, pré-carrega hash com pistas->suspeitos e inicia jogo --- */
+/* -- main: monta o mapa, pré-carrega hash com pistas->suspeitos e inicia jogo --- */
 int main(void) {
     printf("=== Detective Quest — Enigma Studios ===\n");
     printf("Bem-vindo(a)! Explore a mansão, colete pistas e acuse o culpado.\n\n");
 
     /* Montagem manual (fixa) do mapa da mansão — árvore binária
            Hall de Entrada
-            /         \
-       Sala de Estar   Cozinha
-        /      \        /     \
+            /             \
+       Sala de Estar     Cozinha
+         /      \         /     \
     Biblioteca Jardim  Despensa Sala de Jantar
     */
     Sala *hall = criarSala("Hall de Entrada");
